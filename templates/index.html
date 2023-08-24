@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fastify Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.4"
+      integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="mx-4">
+      <p class="text-2xl font-bold mb-4">Movie List</p>
+
+      <table class="min-w-[50%] mb-4">
+        <thead class="border-b text-lg">
+          <tr>
+            <th class="border">Film Name</th>
+            <th class="border">Director</th>
+          </tr>
+        </thead>
+        <tbody class="text-center text-sm" id="table-body">
+          {% for film in films %}
+          <tr>
+            <td class="border">{{ film.name }}</td>
+            <td class="border">{{ film.director }}</td>
+          </tr>
+          {% endfor %} {% include 'films.html' %}
+        </tbody>
+      </table>
+
+      <button
+        class="px-3 py-1 bg-blue-500 text-white ml-4"
+        hx-get="/films"
+        hx-target="#table-body"
+        hx-swap="beforeend"
+      >
+        Load More
+      </button>
+    </div>
+  </body>
+</html>
